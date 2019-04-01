@@ -12,6 +12,9 @@ Vue.component('app-header', {
           <li class="nav-item active">
             <router-link class="nav-link" to="/">Home <span class="sr-only">(current)</span></router-link>
           </li>
+          <li class="nav-item active">
+            <router-link class="nav-link" to="/upload">Upload</router-link>
+          </li>
         </ul>
       </div>
     </nav>
@@ -40,6 +43,21 @@ const Home = Vue.component('home', {
     }
 });
 
+const Upload = Vue.component("upload-form", {
+    template: `
+    <div>
+        <h1>Upload Photo</h1>
+        <form>
+            <label>Description:</label><br/>
+            <textarea></textarea><br/>
+            <label for='photo' class='btn btn-primary'>Browse....</label>
+            <input type="file" style="display: none"/><br/>
+            <input type="submit" value="Upload" class="btn btn-success"/>
+        </form>
+    </div>
+    `
+});
+
 const NotFound = Vue.component('not-found', {
     template: `
     <div>
@@ -56,7 +74,7 @@ const router = new VueRouter({
     mode: 'history',
     routes: [
         {path: "/", component: Home},
-        // Put other routes here
+        {path: "/upload", component: Upload},
 
         // This is a catch all route in case none of the above matches
         {path: "*", component: NotFound}
