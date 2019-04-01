@@ -19,6 +19,8 @@ from werkzeug.utils import secure_filename
 def uploads():
 
      form = UploadForm()
+     
+     print(form.description.data)
 
      if form.validate_on_submit():
         description = form.description.data
@@ -27,9 +29,10 @@ def uploads():
 
          try:
             photoData.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
-            return jsonify(message="201", filename=filename, description=description)
+            return jsonify(message="200", filename=filename, description=description)
         except Exception as e:
-            pass
+            print e
+            return jsonify(errors=["internal Error"])
 
      return jsonify(errors=form_errors(form))
 
